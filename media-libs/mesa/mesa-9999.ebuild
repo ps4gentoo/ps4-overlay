@@ -379,7 +379,7 @@ multilib_src_configure() {
 		fi
 	fi
 
-	emesonargs+=( -Dplatforms=$(use X && echo "x11,")$(use wayland && echo "wayland,")$(use gbm && echo "drm,")surfaceless )
+	emesonargs+=( -Dplatforms=$(use X && echo "x11")$(use wayland && echo "wayland") )
 
 	if use gallium; then
 		emesonargs+=(
@@ -483,10 +483,10 @@ multilib_src_configure() {
 
 	if use gallium; then
 		gallium_enable -- swrast
-		emesonargs+=( -Dosmesa=$(usex osmesa gallium none) )
+		emesonargs+=( -Dosmesa=true )
 	else
 		dri_driver_enable -- swrast
-		emesonargs+=( -Dosmesa=$(usex osmesa classic none) )
+		emesonargs+=( -Dosmesa=true )
 	fi
 
 	driver_list() {
